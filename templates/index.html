@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Generate Your QR Code</h1>
-    <form method="POST">
-        <label>Enter URL or Text:</label>
-        <input type="text" name="data" required>
-        <br><br>
-        <label>QR Code Color:</label>
-        <input type="text" name="fill_color" placeholder="black">
-        <br><br>
-        <label>Background Color:</label>
-        <input type="text" name="bg_color" placeholder="white">
-        <br><br>
-        <button type="submit">Generate QR Code</button>
-    </form>
+    <div class="container">
+        <h1>QR Code Generator</h1>
+        <form method="POST">
+            <input type="text" name="data" placeholder="Enter text or URL" required>
+            <input type="color" name="fill_color" value="#000000" title="QR Code Color">
+            <input type="color" name="bg_color" value="#ffffff" title="Background Color">
+            <button type="submit">Generate QR Code</button>
+        </form>
+
+        {% if qr_code %}
+            <h2>Your QR Code:</h2>
+            <img src="{{ qr_code }}" alt="QR Code">
+            <br>
+            <a href="{{ qr_code }}" download="qr_code.png">Download QR Code</a>
+        {% endif %}
+    </div>
 </body>
 </html>
